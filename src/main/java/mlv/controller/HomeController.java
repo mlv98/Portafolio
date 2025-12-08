@@ -36,7 +36,7 @@ public class HomeController {
         
         misProyectos.add(new Proyecto(
             "RAMPAGE-GAMES", 
-            "Una página simple hecha con HTML y CSS.", 
+            "Aplicación web en Java con Spring Boot ", 
             "/images/proyecto1.jpg", 
             "/rampage"
         ));
@@ -56,7 +56,7 @@ public class HomeController {
             ));
         misProyectos.add(new Proyecto(
                 "Automatización de Facturas", 
-                "Aplicación compleja en Java.", 
+                "Creación, validación y envío de facturas", 
                 "/images/proximamente1.jpg", 
                 "/"
             ));
