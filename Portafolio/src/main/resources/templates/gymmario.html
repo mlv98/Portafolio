@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GymFitness - Proyecto</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+	rel="stylesheet">
+
+<style>
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #0d0d0d;
+	color: white;
+}
+
+.project-header {
+	text-align: center;
+	padding: 60px 20px 40px 20px;
+}
+
+.project-header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 15px;
+}
+
+.project-header p {
+	font-size: 1.1rem;
+	color: #ccc;
+}
+
+/* Botón GitHub */
+.btn-github {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: white;
+	border: 2px solid white;
+	padding: 10px 22px;
+	border-radius: 10px;
+	font-weight: 500;
+	transition: 0.3s ease;
+	text-decoration: none;
+}
+
+.btn-github:hover {
+	background-color: white;
+	color: #0d0d0d;
+}
+
+/* Icono GitHub blanco */
+.btn-github img {
+	width: 22px;
+	height: 22px;
+	filter: invert(1); /* convierte el SVG en blanco */
+	transition: 0.3s ease;
+}
+
+.btn-github:hover img {
+	filter: invert(0); /* se vuelve negro si el fondo es blanco */
+}
+
+/* Carrusel */
+.carousel-item img, .carousel-item video {
+	width: 100%;
+	max-height: 620px;
+	object-fit: cover;
+	border-radius: 15px;
+}
+
+.project-description {
+	padding: 40px 20px;
+	background-color: rgba(255, 255, 255, 0.05);
+	border-radius: 15px;
+	margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- CABECERA DEL PROYECTO -->
+	<div class="container project-header">
+		<h1>Gym-Fitness</h1>
+		<p>Sitio web corporativo responsive desarrollado en WordPress con
+			enfoque en captación de clientes y gestión de contenido.</p>
+
+		<!-- Botón GitHub (icono blanco real) -->
+		<a href="https://github.com/mlv98" target="_blank"
+			class="btn-github mt-3"> <img
+			src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/github.svg"
+			alt="GitHub"> Ver en GitHub
+		</a>
+	</div>
+
+	<!-- GALERÍA / CAROUSEL -->
+	<div id="projectCarousel" class="carousel slide container"
+		data-bs-ride="false">
+		<div class="carousel-inner">
+
+			<!-- Video como primer item -->
+			<div class="carousel-item active">
+				<video class="d-block w-100" controls>
+					<source src="/videos/gymfitness.mp4" type="video/mp4">
+				</video>
+			</div>
+
+			<!-- Imágenes -->
+			<div class="carousel-item">
+			
+
+		</div>
+
+		<!-- Controles -->
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#projectCarousel" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon"></span> <span
+				class="visually-hidden">Anterior</span>
+		</button>
+
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#projectCarousel" data-bs-slide="next">
+			<span class="carousel-control-next-icon"></span> <span
+				class="visually-hidden">Siguiente</span>
+		</button>
+	</div>
+
+	<!-- DESCRIPCIÓN -->
+	<div class="container project-description">
+		<h3>Descripción del Proyecto</h3>
+		<p>Desarrollé esta solución utilizando un CMS (WordPress) para
+			responder a una necesidad de negocio prioritaria: establecer una
+			identidad digital rápida y escalable. El proyecto se centró en la
+			experiencia de usuario (UX), permitiendo a los clientes consultar
+			horarios, servicios y planes de entrenamiento de forma intuitiva.
+
+			Aunque mi perfil es técnico (Java/Backend), este proyecto demuestra
+			mi versatilidad para elegir la herramienta más eficiente según el
+			problema (Time-to-market), mi capacidad de adaptación a entornos CMS
+			y mis habilidades en diseño Frontend y maquetación.</p>
+
+		<h5>Tecnologías usadas:</h5>
+		<ul>
+			<li>CMS: WordPress (Gestión de contenido).</li>
+			<li>CSS3 (Personalización de estilos), JavaScript.</li>
+			<li>Plugins/Tools: Elementor (Maquetación visual), Contact Form 7 (Gestión de leads)</li>
+			
+		</ul>
+
+		<!-- Botón volver -->
+		<a href="/" class="btn btn-outline-light mt-4"> ← Volver al
+			Portafolio </a>
+
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

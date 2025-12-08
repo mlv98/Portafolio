@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio Profesional</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+	rel="stylesheet">
+
+<style>
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #f8f9fa;
+	margin: 0;
+	padding: 0;
+}
+
+/* HERO */
+.hero-section {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+		url('/images/fondo.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: white;
+	padding: 120px 0;
+	text-shadow: 0 3px 18px rgba(0, 0, 0, 0.8);
+	text-align: center;
+}
+
+/* Foto perfil */
+.profile-img {
+	width: 300px;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 5px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+	transition: transform 0.3s;
+}
+
+/* Redes sociales */
+.social-btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: 55px;
+	height: 55px;
+	background: rgba(255, 255, 255, 0.1);
+	color: white;
+	border-radius: 50%;
+	margin: 0 10px;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	font-size: 1.2rem;
+}
+
+.social-btn:hover {
+	background: white;
+	color: #203a43;
+	transform: translateY(-5px);
+}
+
+/* Secciones */
+.full-bg-section {
+	background-color: #0d0d0d;
+	color: white;
+	width: 100%;
+	padding: 60px 0;
+}
+
+/* Contenedor interno */
+.full-bg-section .container {
+	max-width: 1100px;
+}
+
+/* Badges */
+.skill-badge {
+	color: white;
+	padding: 5px 12px;
+	border-radius: 12px;
+	font-weight: 600;
+	margin: 3px;
+	display: inline-block;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	cursor: default;
+}
+
+.skill-badge:hover {
+	transform: scale(1.1);
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.skill-badge:nth-child(1) {
+	background-color: #1abc9c;
+}
+
+.skill-badge:nth-child(2) {
+	background-color: #3498db;
+}
+
+.skill-badge:nth-child(3) {
+	background-color: #9b59b6;
+}
+
+.skill-badge:nth-child(4) {
+	background-color: #e67e22;
+}
+
+.skill-badge:nth-child(5) {
+	background-color: #e74c3c;
+}
+
+.skill-badge:nth-child(6) {
+	background-color: #f1c40f;
+	color: #000;
+}
+
+.skill-badge:nth-child(7) {
+	background-color: #2ecc71;
+}
+
+.skill-badge:nth-child(8) {
+	background-color: #34495e;
+}
+
+.skill-badge:nth-child(9) {
+	background-color: #16a085;
+}
+
+.skill-badge:nth-child(10) {
+	background-color: #8e44ad;
+}
+
+.skill-badge:nth-child(11) {
+	background-color: #d35400;
+}
+
+/* Tarjetas proyectos y certificaciones */
+.project-card {
+	border: none;
+	border-radius: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	overflow: hidden;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.project-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.project-img-container {
+	height: 220px;
+	overflow: hidden;
+}
+
+.project-card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+	transform: scale(1.1);
+}
+
+.project-card .btn-outline-dark {
+	border-color: rgba(255, 255, 255, 0.7);
+	color: white;
+}
+
+.project-card .btn-outline-dark:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+}
+
+.timeline {
+	margin: 0;
+	padding: 0;
+}
+
+.timeline-event {
+	margin-bottom: 30px;
+}
+
+.timeline-icon {
+	font-size: 1.5rem;
+	margin-right: 15px;
+	color: #3498db;
+}
+</style>
+</head>
+<body>
+
+	<!-- HERO -->
+	<header class="hero-section">
+		<div class="container">
+			<img src="/images/perfil.jpg" alt="Foto de perfil"
+				class="profile-img mb-4"
+				onerror="this.src='https://ui-avatars.com/api/?name=Tu+Nombre&background=random&size=200'">
+			<h1 class="fw-bold display-5" th:text="${nombre}">Tu Nombre</h1>
+			<p class="lead mb-4" style="opacity: 0.9;">Junior Power Platform
+				| Automatización y Desarrollador Full-Stack</p>
+			<div class="d-flex justify-content-center mb-4">
+				<a href="https://www.linkedin.com/in/mariolarrua1998"
+					target="_blank" class="social-btn" title="LinkedIn"><i
+					class="fab fa-linkedin-in"></i></a> <a href="https://github.com/mlv98"
+					target="_blank" class="social-btn" title="GitHub"><i
+					class="fab fa-github"></i></a> <a
+					href="https://www.youtube.com/@mariolv1998" target="_blank"
+					class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+				<a href="mailto:mario.larruacorreo@gmail.com" class="social-btn"
+					title="Email"><i class="fas fa-envelope"></i></a>
+			</div>
+		</div>
+	</header>
+
+	<!-- SOBRE MÍ -->
+	<section class="full-bg-section">
+		<div class="container text-center">
+			<h2 class="fw-bold mb-3">Sobre Mí</h2>
+			<p>
+				<strong>Consultor de Digitalización y Automatización de
+					Procesos</strong> 
+					<br>
+					Ayudo a las organizaciones a optimizar sus operaciones
+					mediante la tecnología. Combino mi capacidad técnica como
+					Desarrollador Full Stack con una visión funcional para detectar
+					cuellos de botella y resolverlos mediante automatización
+					inteligente. Enfocado en la calidad del código, la experiencia de
+					usuario (UX) y la seguridad de los datos, busco integrarme en
+					equipos dinámicos donde pueda aportar soluciones innovadoras desde
+					el primer día. 
+			</p>
+			<div class="mt-3">
+				<span class="skill-badge">POWER APPS</span> <span
+					class="skill-badge">POWER AUTOMATE</span> <span class="skill-badge">POWER
+					BI</span> <span class="skill-badge">POWER PAGES</span> <span
+					class="skill-badge">MICROSOFT COPILOT STUDIO</span> <span
+					class="skill-badge">AI BUILDER</span> <span class="skill-badge">JAVA
+					| SPRING BOOT</span> <span class="skill-badge">SQL</span> <span
+					class="skill-badge">JAVASCRIPT</span> <span class="skill-badge">JSON</span>
+				
+			</div>
+		</div>
+	</section>
+
+	<!-- PROYECTOS -->
+	<section class="full-bg-section">
+		<div class="container text-center">
+			<h2 class="fw-bold mb-4">Proyectos</h2>
+			<div class="row g-5">
+				<div class="col-md-3" th:each="p : ${proyectos}">
+					<div class="project-card h-100 shadow-sm">
+						<div class="project-img-container">
+							<img th:src="${p.imagenUrl}" alt="Imagen del proyecto"
+								onerror="this.src='https://via.placeholder.com/400x300?text=Proyecto'">
+						</div>
+						<div class="card-body d-flex flex-column">
+							<h5 class="card-title fw-bold" th:text="${p.titulo}">Título</h5>
+							<p class="card-text flex-grow-1" th:text="${p.descripcion}">Descripción...</p>
+							<div class="mt-3">
+								<a th:href="${p.demoUrl}"
+									class="btn btn-outline-dark w-100 rounded-pill" target="_blank">
+									<i class="fas fa-play-circle me-2"></i>Ver Demo
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- EDUCACIÓN -->
+	<section class="full-bg-section">
+		<div class="container text-center">
+			<h2 class="fw-bold mb-5">Educación</h2>
+			<div class="row g-4">
+				<div class="col-md-6">
+					<div class="project-card">
+						<h5>Curso Consultor Power Platform | Tajamar (Madrid)</h5>
+						<p class="small mb-1">Oct 2025 – Actualidad (500h intensivos)</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="project-card">
+						<h5>Grado Superior Desarrollo de Aplicaciones Web | EEP
+							iGroup</h5>
+						<p class="small mb-1">2023 – 2025</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="project-card">
+						<h5>Curso Desarrollo en Java con Framework Spring | Grupo
+							Aspasia</h5>
+						<p class="small mb-1">2025</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="project-card">
+						<h5>Ingeniería Informática</h5>
+						<p class="small mb-1">2016 – 2020 | Base sólida en Algoritmia,
+							BD e Ingeniería del Software</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CERTIFICACIONES -->
+	<section class="full-bg-section">
+		<div class="container text-center">
+			<h2 class="fw-bold mb-5">Licencias y Certificaciones</h2>
+			<div class="row g-4">
+				<!-- Ejemplo de certificación -->
+				<div class="col-md-6 col-lg-4">
+					<div class="project-card">
+						<div class="d-flex align-items-center mb-3">
+							<img src="/images/pmi-logo.png" alt="PMI"
+								style="width: 50px; margin-right: 10px;">
+							<h5 class="mb-0">Gestión de Proyectos Ágiles</h5>
+						</div>
+						<p class="small mb-1">
+							<strong>Expedición:</strong> dic. 2025
+						</p>
+						<p class="small">
+							<strong>Aptitudes:</strong> Gestión ágil de proyectos
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="project-card">
+						<div class="d-flex align-items-center mb-3">
+							<img src="/images/microsoft-logo.png" alt="Microsoft"
+								style="width: 50px; margin-right: 10px;">
+							<h5 class="mb-0">Power Apps Canvas</h5>
+						</div>
+						<p class="small mb-1">
+							<strong>Expedición:</strong> nov. 2025
+						</p>
+						<p class="small">
+							<strong>Aptitudes:</strong> Creación y administración de
+							aplicaciones de lienzo
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="project-card">
+						<div class="d-flex align-items-center mb-3">
+							<img src="/images/microsoft-logo.png" alt="Microsoft"
+								style="width: 50px; margin-right: 10px;">
+							<h5 class="mb-0">Power Apps Model-Driven</h5>
+						</div>
+						<p class="small mb-1">
+							<strong>Expedición:</strong> nov. 2025
+						</p>
+						<p class="small">
+							<strong>Aptitudes:</strong> Creación y administración de
+							aplicaciones basadas en modelo con Dataverse
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="project-card">
+						<div class="d-flex align-items-center mb-3">
+							<img src="/images/microsoft-logo.png" alt="Microsoft"
+								style="width: 50px; margin-right: 10px;">
+							<h5 class="mb-0">Power Automate</h5>
+						</div>
+						<p class="small mb-1">
+							<strong>Expedición:</strong> nov. 2025
+						</p>
+						<p class="small">
+							<strong>Aptitudes:</strong> Microsoft Power Automate
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="project-card">
+						<div class="d-flex align-items-center mb-3">
+							<img src="/images/microsoft-logo.png" alt="Microsoft AI Skills"
+								style="width: 50px; margin-right: 10px;">
+							<h5 class="mb-0">Microsoft 365 Copilot</h5>
+						</div>
+						<p class="small mb-1">
+							<strong>Expedición:</strong> nov. 2025
+						</p>
+						<p class="small">
+							<strong>Aptitudes:</strong> Microsoft 365 · Microsoft Purview ·
+							Microsoft Entra ID · Microsoft 365 Copilot
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="project-card">
+						<div class="d-flex align-items-center mb-3">
+							<img src="/images/linkedin-logo.png" alt="LinkedIn"
+								style="width: 50px; margin-right: 10px;">
+							<h5 class="mb-0">Análisis financiero con Power Apps</h5>
+						</div>
+						<p class="small mb-1">
+							<strong>Expedición:</strong> nov. 2025
+						</p>
+						<p class="small">
+							<strong>Aptitudes:</strong> Microsoft PowerApps · Análisis
+							financiero
+						</p>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="project-card">
+						<div class="d-flex align-items-center mb-3">
+							<img src="/images/google-logo.png" alt="Google"
+								style="width: 50px; margin-right: 10px;">
+							<h5 class="mb-0">Google Analytics Certification</h5>
+						</div>
+						<p class="small mb-1">
+							<strong>Expedición:</strong> oct. 2025
+						</p>
+						<p class="small">
+							<strong>Vencimiento:</strong> nov. 2026
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- FOOTER -->
+	<footer class="text-center py-4 bg-black" style="color: white;">
+		<small>&copy; 2025 Desarrollado por Mario Larrúa Vega</small>
+	</footer>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
