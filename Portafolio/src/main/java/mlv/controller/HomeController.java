@@ -10,14 +10,14 @@ import mlv.model.Proyecto;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller // Esto le dice a Spring: "Oye, esta clase maneja peticiones web"
+@Controller 
 public class HomeController {
 	
 	@GetMapping("/rampage")
 	public String rampage(Model model) {
 	    model.addAttribute("titulo", "Rampage-Games");
 	    model.addAttribute("descripcion", "Aplicación de consulta y análisis de videojuegos...");
-	    return "rampage"; // Thymeleaf buscará src/main/resources/templates/rampage.html
+	    return "rampage"; 
 	}
 	
 	@GetMapping("/gymmario")
@@ -26,13 +26,27 @@ public class HomeController {
 	    model.addAttribute("descripcion", "Sitio web corporativo responsive desarrollado en WordPress con enfoque en captación de clientes y gestión de contenido.");
 	    return "gymmario"; 
 	}
+	
+	@GetMapping("/nano")
+	public String nano(Model model) {
+	    model.addAttribute("titulo", "Nano-TI");
+	    model.addAttribute("descripcion", "Nano TI es un agente conversacional inteligente");
+	    return "nano"; 
+	}
 
-    @GetMapping("/") // Esto atiende cuando alguien entra a "tu-web.com/"
+    @GetMapping("/") 
     public String inicio(Model model) {
     	
     	
-        // 1. Creamos la lista de proyectos (Simulando una base de datos)
+       
         List<Proyecto> misProyectos = new ArrayList<>();
+        
+        misProyectos.add(new Proyecto(
+                "Nano TI", 
+                "Copilot Studio-Power Automate-Dataverse-Outlook365 ", 
+                "/images/nano.png", 
+                "/nano"
+            ));
         
         misProyectos.add(new Proyecto(
             "RAMPAGE-GAMES", 
@@ -48,12 +62,7 @@ public class HomeController {
             "/gymmario"
         ));
         
-        misProyectos.add(new Proyecto(
-                "Chatbot de Soporte", 
-                "AI Builder - Integración con Teams ", 
-                "/images/proximamente1.jpg", 
-                "/"
-            ));
+      
         misProyectos.add(new Proyecto(
                 "Automatización de Facturas", 
                 "Creación, validación y envío de facturas", 
@@ -61,12 +70,11 @@ public class HomeController {
                 "/"
             ));
 
-        // 2. Pasamos los datos al HTML (La vista)
-        // "proyectos" es el nombre que usaremos en el HTML para recuperar la lista
+        
         model.addAttribute("proyectos", misProyectos); 
         model.addAttribute("nombre", "Mario Larrúa Vega");
 
-        // 3. Retornamos el nombre del archivo HTML (sin el .html)
+        
         return "index"; 
     }
 }
