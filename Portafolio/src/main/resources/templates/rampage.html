@@ -1,151 +1,182 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rampage - Proyecto</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rampage - Proyecto</title>
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0d0d0d;
-            color: white;
-        }
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+	rel="stylesheet">
 
-        .project-header {
-            text-align: center;
-            padding: 60px 20px 40px 20px;
-        }
+<style>
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #0d0d0d;
+	color: white;
+}
 
-        .project-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
+.project-header {
+	text-align: center;
+	padding: 60px 20px 40px 20px;
+}
 
-        .project-header p {
-            font-size: 1.1rem;
-            color: #ccc;
-        }
+.project-header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 15px;
+}
 
-        /* Botón GitHub */
-        .btn-github {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: 0.3s ease;
-            text-decoration: none;
-        }
+.project-header p {
+	font-size: 1.1rem;
+	color: #ccc;
+}
 
-        .btn-github:hover {
-            background-color: white;
-            color: #0d0d0d;
-        }
+/* Botón GitHub */
+.btn-github {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: white;
+	border: 2px solid white;
+	padding: 10px 22px;
+	border-radius: 10px;
+	font-weight: 500;
+	transition: 0.3s ease;
+	text-decoration: none;
+}
 
-        /* Icono GitHub blanco */
-        .btn-github img {
-            width: 22px;
-            height: 22px;
-            filter: invert(1); /* convierte el SVG en blanco */
-            transition: 0.3s ease;
-        }
+.btn-github:hover {
+	background-color: white;
+	color: #0d0d0d;
+}
 
-        .btn-github:hover img {
-            filter: invert(0); /* se vuelve negro si el fondo es blanco */
-        }
+/* Icono GitHub blanco */
+.btn-github img {
+	width: 22px;
+	height: 22px;
+	filter: invert(1); /* convierte el SVG en blanco */
+	transition: 0.3s ease;
+}
 
-        /* Carrusel */
-        .carousel-item img,
-        .carousel-item video {
-            width: 100%;
-            max-height: 620px;
-            object-fit: cover;
-            border-radius: 15px;
-        }
+.btn-github:hover img {
+	filter: invert(0); /* se vuelve negro si el fondo es blanco */
+}
 
-        .project-description {
-            padding: 40px 20px;
-            background-color: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            margin-top: 30px;
-        }
-    </style>
+/* Carrusel */
+.carousel-item img, .carousel-item video {
+	width: 100%;
+	max-height: 620px;
+	object-fit: cover;
+	border-radius: 15px;
+}
+
+.project-description {
+	padding: 40px 20px;
+	background-color: rgba(255, 255, 255, 0.05);
+	border-radius: 15px;
+	margin-top: 30px;
+}
+</style>
 </head>
 
 <body>
 
-    <!-- CABECERA DEL PROYECTO -->
-    <div class="container project-header">
-        <h1>Rampage</h1>
-        <p>Aplicación de consulta y análisis de videojuegos, con integración de APIs externas, desarrollada en Spring Boot, Thymeleaf y MySQL.</p>
+	<!-- CABECERA DEL PROYECTO -->
+	<div class="container project-header">
+		<h1>Rampage</h1>
+		<p>Aplicación de consulta y análisis de videojuegos, con
+			integración de APIs externas, desarrollada en Spring Boot, Thymeleaf
+			y MySQL.</p>
 
-        <!-- Botón GitHub (icono blanco real) -->
-        <a href="https://github.com/mlv98/ProyectoRampage" target="_blank" class="btn-github mt-3">
-            <img src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/github.svg" alt="GitHub">
-            Ver en GitHub
-        </a>
-    </div>
+		<!-- Botón GitHub (icono blanco real) -->
+		<a href="https://github.com/mlv98/ProyectoRampage" target="_blank"
+			class="btn-github mt-3"> <img
+			src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/github.svg"
+			alt="GitHub"> Ver en GitHub
+		</a>
+	</div>
 
-    <!-- GALERÍA / CAROUSEL -->
-    <div id="projectCarousel" class="carousel slide container" data-bs-ride="false">
-        <div class="carousel-inner">
+	<!-- GALERÍA / CAROUSEL -->
+	<div id="projectCarousel" class="carousel slide container"
+		data-bs-ride="false">
+		<div class="carousel-inner">
 
-            <!-- Video como primer item -->
-            <div class="carousel-item active">
-                <video class="d-block w-100" controls>
-                    <source src="/videos/rampage.mp4" type="video/mp4">
-                </video>
-            </div>
+			<!-- Video como primer item -->
+			<div class="carousel-item active">
+				<video class="d-block w-100" controls>
+					<source src="/videos/rampage.mp4" type="video/mp4">
+				</video>
+			</div>
 
-            <!-- Imágenes -->
-            <div class="carousel-item"><img src="/images/rampage/1.jpg" class="d-block w-100" alt="1"></div>
-            <div class="carousel-item"><img src="/images/rampage/2.jpg" class="d-block w-100" alt="2"></div>
-            <div class="carousel-item"><img src="/images/rampage/3.jpg" class="d-block w-100" alt="3"></div>
-            <div class="carousel-item"><img src="/images/rampage/4.jpg" class="d-block w-100" alt="4"></div>
-            <div class="carousel-item"><img src="/images/rampage/5.jpg" class="d-block w-100" alt="5"></div>
-            <div class="carousel-item"><img src="/images/rampage/6.jpg" class="d-block w-100" alt="6"></div>
-            <div class="carousel-item"><img src="/images/rampage/7.jpg" class="d-block w-100" alt="7"></div>
-            <div class="carousel-item"><img src="/images/rampage/8.jpg" class="d-block w-100" alt="8"></div>
-            <div class="carousel-item"><img src="/images/rampage/9.jpg" class="d-block w-100" alt="9"></div>
+			<!-- Imágenes -->
+			<div class="carousel-item">
+				<img src="/images/rampage/1.jpg" class="d-block w-100" alt="1">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/2.jpg" class="d-block w-100" alt="2">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/3.jpg" class="d-block w-100" alt="3">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/4.jpg" class="d-block w-100" alt="4">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/5.jpg" class="d-block w-100" alt="5">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/6.jpg" class="d-block w-100" alt="6">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/7.jpg" class="d-block w-100" alt="7">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/8.jpg" class="d-block w-100" alt="8">
+			</div>
+			<div class="carousel-item">
+				<img src="/images/rampage/9.jpg" class="d-block w-100" alt="9">
+			</div>
 
-        </div>
+		</div>
 
-        
-    </div>
 
-    <!-- DESCRIPCIÓN -->
-    <div class="container project-description">
-        <h3>Descripción del Proyecto</h3>
-        <p>
-            Rampage es una plataforma donde los usuarios pueden consultar información sobre videojuegos, 
-            analizar compatibilidad de hardware y seguir las últimas tendencias del mercado.  
-            Incluye integración con APIs externas como RAWG y NewsAPI, funcionalidades de filtrado y búsqueda avanzada, 
-            y un diseño full-stack en Spring Boot con persistencia en MySQL.
-        </p>
+	</div>
 
-        <h5>Tecnologías usadas:</h5>
-        <ul>
-            <li>Spring Boot</li>
-            <li>Thymeleaf</li>
-            <li>MySQL</li>
-            <li>JavaScript / AJAX</li>
-            <li>APIs externas (RAWG, NewsAPI)</li>
-        </ul>
+	<!-- DESCRIPCIÓN -->
+	<div class="container project-description">
+		<h3>Descripción del Proyecto</h3>
+		<p>Desarrollo Full Stack de una plataforma integral para gamers
+			bajo arquitectura MVC. La funcionalidad principal es un motor de
+			compatibilidad de hardware que, mediante un algoritmo propio, parsea
+			requisitos de la API de RAWG y los compara matemáticamente con una
+			base de datos local de benchmarks para validar el rendimiento del PC.
+			El sistema implementa seguridad robusta (Spring Security con cifrado
+			BCrypt y protección CSRF) , consumo de APIs externas mediante
+			RestTemplate y WebClient , y un diseño responsive moderno con
+			Tailwind CSS.</p>
 
-        <!-- Botón volver -->
-        <a href="/" class="btn btn-outline-light mt-4">
-            ← Volver al Portafolio
-        </a>
+		<h5>Tecnologías usadas:</h5>
+		<ul>
+			<li>Java 17</li>
+			<li>Spring Boot 3</li>
+			<li>Spring Security 6</li>
+			<li>MySQL 8</li>
+			<li>Thymeleaf</li>
+			<li>Tailwind CSS</li>
+			<li>JavaScript / Fetch API</li>
+			
+		</ul>
 
-    </div>
+		<!-- Botón volver -->
+		<a href="/" class="btn btn-outline-light mt-4"> ← Volver al
+			Portafolio </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
