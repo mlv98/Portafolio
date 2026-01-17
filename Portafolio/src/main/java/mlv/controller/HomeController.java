@@ -42,6 +42,13 @@ public class HomeController {
         List<Proyecto> misProyectos = new ArrayList<>();
         
         misProyectos.add(new Proyecto(
+                "Nano TI", 
+                "Copilot Studio-Power Automate-Dataverse-Outlook365 ", 
+                "/images/nano.png", 
+                "/nano"
+            ));
+        
+        misProyectos.add(new Proyecto(
                 "RAMPAGE-GAMES", 
                 "Aplicación web en Java con Spring Boot ", 
                 "/images/proyecto1.jpg", 
@@ -49,14 +56,6 @@ public class HomeController {
             ));
             
        
-        
-        misProyectos.add(new Proyecto(
-                "Nano TI", 
-                "Copilot Studio-Power Automate-Dataverse-Outlook365 ", 
-                "/images/nano.png", 
-                "/nano"
-            ));
-        
         
         misProyectos.add(new Proyecto(
             "GYM - FITNESS", 

@@ -160,6 +160,7 @@ h1, h2, h3, h4, h5 {
 .skill-badge:nth-child(13) {
 	background-color: #d30074;
 }
+
 .skill-badge:nth-child(14) {
 	background-color: #d35400;
 }
@@ -296,6 +297,43 @@ h1, h2, h3, h4, h5 {
 	border: 1px solid #444;
 	font-weight: 600;
 }
+
+
+/* Estilo Glassmorphism para el botón de CV */
+.cv-glass-btn {
+    /* Fondo semitransparente oscuro (ajustado para parecerse a tus iconos) */
+    background-color: rgba(0, 0, 0, 0.4); 
+    /* Borde fino y sutil */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Texto blanco */
+    color: #fff;
+    /* Redondeado completo (forma de pastilla) */
+    border-radius: 50px;
+    /* Espaciado interno */
+    padding: 10px 30px;
+    /* Fuente y tamaño */
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    /* Transiciones suaves */
+    transition: all 0.3s ease;
+    /* Efecto de desenfoque de fondo (opcional, queda muy moderno) */
+    backdrop-filter: blur(5px);
+}
+
+/* Efecto al pasar el ratón (Hover) */
+.cv-glass-btn:hover {
+    background-color: #fff; /* Se vuelve blanco sólido */
+    color: #000; /* Texto negro */
+    transform: translateY(-3px); /* Se eleva ligeramente */
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3); /* Resplandor */
+    border-color: #fff;
+}
+
+/* Ajuste del icono dentro del botón */
+.cv-glass-btn i {
+    font-size: 1.2rem; /* Un poco más grande que el texto */
+}
 </style>
 </head>
 <body>
@@ -306,8 +344,7 @@ h1, h2, h3, h4, h5 {
 				class="profile-img mb-4"
 				onerror="this.src='https://ui-avatars.com/api/?name=Tu+Nombre&background=random&size=200'">
 			<h1 class="fw-bold display-5" th:text="${nombre}">Tu Nombre</h1>
-			<p class="lead mb-5" style="opacity: 0.9;">Desarrollador Backend
-				| Java Spring Boot & Microsoft Power Platform</p>
+			<p class="lead mb-5" style="opacity: 0.9;">  Microsoft Power Platform & Desarrollador Backend</p>
 			<div class="d-flex justify-content-center mb-4">
 				<a href="https://www.linkedin.com/in/mariolarrua1998"
 					target="_blank" class="social-btn" title="LinkedIn"><i
@@ -319,6 +356,14 @@ h1, h2, h3, h4, h5 {
 				<a href="mailto:mario.larruacorreo@gmail.com" class="social-btn"
 					title="Email"><i class="fas fa-envelope"></i></a>
 			</div>
+			<div class="d-flex justify-content-center mb-4">
+    <a href="/cv/CV Mario Larrúa Vega.pdf" 
+       class="cv-glass-btn d-inline-flex align-items-center" 
+       download="CV_Mario_Larrua_PowerPlatform.pdf">
+        <i class="fas fa-file-download me-1"></i> Descargar CV
+    </a>
+</div>
+</div>
 		</div>
 	</header>
 
@@ -326,41 +371,28 @@ h1, h2, h3, h4, h5 {
 		<div class="container text-center">
 			<h2 class="fw-bold mb-3">Sobre Mí</h2>
 
-			<p class="fs-5">
-				Soy un Desarrollador Backend apasionado por la
-					arquitectura limpia y el código bien estructurado. Mi formación
-					base en Ingeniería Informática me enseñó los fundamentos,
-					pero mi experiencia real en TI me enseñó a resolver problemas. Me
-					especializo en crear APIs y microservicios escalables con Java y
-					Spring Boot, asegurando siempre la calidad mediante metodologías de
-					testing rigurosas. ¿Qué me hace diferente? No solo programo;
-					integro. Cuento con certificaciones oficiales en Microsoft Power
-					Platform, lo que me permite unir la potencia del desarrollo a
-					medida con la velocidad de las herramientas Low-Code
-					empresariales."
-			</p>
+			<p class="fs-5">Ayudo a las empresas a modernizarse transformando
+				procesos lentos y manuales en soluciones digitales ágiles con
+				Microsoft Power Platform. Cuento con certificaciones oficiales y
+				credenciales Applied Skills que validan mi capacidad técnica real.
+
+				Mi valor diferencial es mi base técnica: gracias a mi experiencia en
+				Bases de Datos (SQL) y Sistemas, mis aplicaciones no solo son
+				visualmente funcionales, sino que son robustas, seguras y están
+				preparadas para integrarse en entornos corporativos complejos.</p>
 
 			<div class="mt-3">
-			    <span class="skill-badge">JAVA 17 | SPRING BOOT 3</span>
-			    <span class="skill-badge">SPRING SECURITY</span>
-			    <span class="skill-badge">REST API</span>
-			    <span class="skill-badge">JPA / HIBERNATE</span>
-			
-			    <span class="skill-badge">JUNIT 5</span>
-			    <span class="skill-badge">MOCKITO</span>
-			    <span class="skill-badge">DOCKER</span>
-			    <span class="skill-badge">GIT</span>
-			
-			    <span class="skill-badge">MySQL</span>
-			    <span class="skill-badge">SQL SERVER</span>
-			
-			    <span class="skill-badge">POWER PLATFORM</span>
-			    <span class="skill-badge">MS COPILOT STUDIO</span>
-			    <span class="skill-badge">DATAVERSE</span>
-			
-			    <span class="skill-badge">THYMELEAF</span>
-			    <span class="skill-badge">JAVASCRIPT</span>
-			    <span class="skill-badge">TAILWIND CSS</span>
+			<span
+					class="skill-badge">POWER PLATFORM</span>
+				<span class="skill-badge">Power Apps - Canvas & Model</span> 
+				<span class="skill-badge">Power Automate</span>
+				<span class="skill-badge">DATAVERSE</span> 
+				<span class="skill-badge">Copilot Studio</span> 
+					<span class="skill-badge">REST API</span>   <span
+					class="skill-badge">MOCKITO</span> <span class="skill-badge">DOCKER</span>
+				<span class="skill-badge">GIT</span> <span class="skill-badge">MySQL</span>
+				<span class="skill-badge">SQL SERVER</span>   <span class="skill-badge">JAVASCRIPT</span>
+				<span class="skill-badge">TAILWIND CSS</span>
 			</div>
 		</div>
 	</section>
@@ -407,8 +439,8 @@ h1, h2, h3, h4, h5 {
 						<span class="edu-date">2016 – 2020</span>
 					</div>
 				</div>
-				
-				
+
+
 				<div class="col-md-6 col-lg-3">
 					<div class="edu-card-new">
 						<div class="edu-icon-circle">
@@ -419,7 +451,7 @@ h1, h2, h3, h4, h5 {
 						<span class="edu-date">2023 – 2025</span>
 					</div>
 				</div>
-				
+
 				<div class="col-md-6 col-lg-3">
 					<div class="edu-card-new">
 						<div class="edu-icon-circle">
@@ -442,7 +474,7 @@ h1, h2, h3, h4, h5 {
 					</div>
 				</div>
 
-			
+
 			</div>
 		</div>
 	</section>
