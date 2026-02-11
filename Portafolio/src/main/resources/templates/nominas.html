@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+	rel="stylesheet">
+
+<style>
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #0d0d0d;
+	color: white;
+}
+
+.project-header {
+	text-align: center;
+	padding: 60px 20px 40px 20px;
+}
+
+.project-header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 15px;
+}
+
+.project-header p {
+	font-size: 1.1rem;
+	color: #ccc;
+}
+
+/* Botón GitHub */
+.btn-github {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	color: white;
+	border: 2px solid white;
+	padding: 10px 22px;
+	border-radius: 10px;
+	font-weight: 500;
+	transition: 0.3s ease;
+	text-decoration: none;
+}
+
+.btn-github:hover {
+	background-color: white;
+	color: #0d0d0d;
+}
+
+/* Icono GitHub blanco */
+.btn-github img {
+	width: 22px;
+	height: 22px;
+	filter: invert(1); /* convierte el SVG en blanco */
+	transition: 0.3s ease;
+}
+
+.btn-github:hover img {
+	filter: invert(0); /* se vuelve negro si el fondo es blanco */
+}
+
+/* Carrusel */
+.carousel-item img, .carousel-item video {
+	width: 100%;
+	max-height: 750px;
+	object-fit: cover;
+	border-radius: 15px;
+}
+
+.project-description {
+	padding: 40px 20px;
+	background-color: rgba(255, 255, 255, 0.05);
+	border-radius: 15px;
+	margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- CABECERA DEL PROYECTO -->
+	<div class="container project-header">
+    <h1>Gestor de Nóminas</h1>
+    <p>Es una solución inteligente para la administración de pagos que automatiza la creación, 
+    consulta y generación de recibos PDF. A través de una interfaz ágil, el sistema centraliza 
+    la información salarial, procesa los cálculos y almacena automáticamente los comprobantes 
+    en la nube para su distribución segura.</p>
+
+
+		<!-- Botón GitHub (icono blanco real) -->
+		<a href="https://github.com/mlv98/Asistente-ti-copilot" target="_blank"
+			class="btn-github mt-3"> <img
+			src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/github.svg"
+			alt="GitHub"> Ver en GitHub
+		</a>
+	</div>
+
+	<!-- GALERÍA / CAROUSEL -->
+	<div id="projectCarousel" class="carousel slide container" data-bs-ride="false">
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <video class="d-block w-100" controls>
+                <source src="/videos/nomina.mp4" type="video/mp4">
+                Tu navegador no soporta videos.
+            </video>
+        </div>
+
+        </div>
+
+    </div>
+
+		<!-- DESCRIPCIÓN -->
+		<div class="container project-description">
+			<h3>Descripción del Proyecto</h3>
+			<p>Este sistema de gestión de nóminas es una solución enfocada en la digitalización y automatización del ciclo de vida de los pagos corporativos. El proyecto resuelve la ineficiencia de los registros manuales mediante una arquitectura integrada que permite crear nuevas nóminas, consultar el histórico de pagos y automatizar la generación de documentos legales. La solución centraliza la información para eliminar errores de cálculo y asegurar que cada registro sea auditable y accesible en tiempo real.</p>
+
+<p>La interfaz del usuario ha sido desarrollada como una <strong>Power App (Canvas)</strong>, proporcionando una experiencia intuitiva para el administrador. La persistencia de los datos se gestiona en <strong>Microsoft Dataverse</strong>, aprovechando su estructura de tablas relacionales para garantizar la integridad de la información sensible. Una vez generada la nómina, el sistema utiliza <strong>Power Automate</strong> para orquestar la lógica de negocio: el flujo extrae los datos, genera un archivo dinámico y lo convierte en un recibo PDF profesional. Finalmente, estos documentos se almacenan y organizan automáticamente en <strong>OneDrive for Business</strong>, facilitando su consulta posterior y permitiendo compartirlos de forma segura con los empleados.</p>
+
+			<h5>Tecnologías usadas:</h5>
+		<ul> <li>Microsoft Power Apps (Canvas): Diseño de la interfaz de usuario personalizada para la captura de datos y visualización de registros.</li> <li>Microsoft Dataverse: Infraestructura de base de datos relacional para el almacenamiento seguro y escalable de la información de nóminas.</li> <li>Microsoft Power Automate: Automatización del flujo de trabajo, procesamiento de datos y orquestación entre servicios.</li> <li>OneDrive for Business: Gestión de almacenamiento en la nube para el resguardo y organización de los archivos PDF generados.</li> </ul>
+
+			<!-- Botón volver -->
+			<a href="/" class="btn btn-outline-light mt-4"> ← Volver al
+				Portafolio </a>
+
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
