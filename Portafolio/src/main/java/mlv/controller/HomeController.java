@@ -35,7 +35,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/nominas")
-	public String nano(Model model) {
+	public String nominas(Model model) {
 	    model.addAttribute("titulo", "Gestor de Nóminas");
 	    model.addAttribute("descripcion", "Crear, consultar y compartir nóminas en PDF.");
 	    return "nominas"; 
