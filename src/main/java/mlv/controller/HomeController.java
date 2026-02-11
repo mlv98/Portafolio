@@ -54,6 +54,13 @@ public class HomeController {
                 "/images/nano.png", 
                 "/nano"
             ));
+		
+		 misProyectos.add(new Proyecto(
+                "Gestor de Nóminas", 
+                "Creación, consulta y envío de PDF", 
+                "/images/nomina.png", 
+                "/nominas"
+            ));
         
         misProyectos.add(new Proyecto(
                 "RAMPAGE-GAMES", 
@@ -62,7 +69,6 @@ public class HomeController {
                 "/rampage"
             ));
             
-       
         
         misProyectos.add(new Proyecto(
             "GYM - FITNESS", 
@@ -72,14 +78,6 @@ public class HomeController {
         ));
         
       
-        misProyectos.add(new Proyecto(
-                "Gestor de Nóminas", 
-                "Creación, consulta y envío de PDF", 
-                "/images/nomina.png", 
-                "/nominas"
-            ));
-
-        
         model.addAttribute("proyectos", misProyectos); 
         model.addAttribute("nombre", "Mario Larrúa Vega");
 
