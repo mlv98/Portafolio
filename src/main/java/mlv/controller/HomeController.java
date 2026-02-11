@@ -75,7 +75,7 @@ public class HomeController {
         misProyectos.add(new Proyecto(
                 "Gestor de Nóminas", 
                 "Creación, consulta y envío de PDF", 
-                "/images/proximamente1.jpg", 
+                "/images/nomina.png", 
                 "/nominas"
             ));
 
