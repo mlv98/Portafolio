@@ -34,6 +34,13 @@ public class HomeController {
 	    return "nano"; 
 	}
 
+	@GetMapping("/nominas")
+	public String nano(Model model) {
+	    model.addAttribute("titulo", "Gestor de Nóminas");
+	    model.addAttribute("descripcion", "Crear, consultar y compartir nóminas en PDF.");
+	    return "nominas"; 
+	}
+
     @GetMapping("/") 
     public String inicio(Model model) {
     	
@@ -66,10 +73,10 @@ public class HomeController {
         
       
         misProyectos.add(new Proyecto(
-                "Automatización de Facturas", 
-                "Creación, validación y envío de facturas", 
+                "Gestor de Nóminas", 
+                "Creación, consulta y envío de PDF", 
                 "/images/proximamente1.jpg", 
-                "/"
+                "/nominas"
             ));
 
         
