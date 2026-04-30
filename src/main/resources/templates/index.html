@@ -1,670 +1,366 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio Profesional</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Larrua - AI & Backend Engineer</title>
+    
+    <!-- Fuentes: JetBrains Mono para código/AI feel, Inter para lectura -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (CDN para prototipado ultrarrápido) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        neon: '#00f3ff',
+                        purple: '#b829ea',
+                        darkBg: '#050505'
+                    }
+                }
+            }
+        }
+    </script>
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&family=Montserrat:wght@600;700;800&display=swap"
-	rel="stylesheet">
+    <!-- UI/UX de Experto en IA - Estilos Base -->
+    <style>
+        body { margin: 0; background-color: #050505; color: #fff; overflow-x: hidden; }
+        
+        /* Contenedor del render 3D Background */
+        #vanta-bg {
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
 
-<style>
-/* --- TIPOGRAFÍA GLOBAL --- */
-body {
-	font-family: 'Inter', sans-serif; /* Texto limpio y moderno */
-	background-color: #f8f9fa;
-	margin: 0;
-	padding: 0;
-	letter-spacing: -0.01em;
-}
+        /* Glassmorphism Classes (Efecto Cristal) */
+        .glass-card {
+            background: rgba(15, 15, 15, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 243, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: #00f3ff;
+            color: #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+        }
 
-h1, h2, h3, h4, h5 {
-	font-family: 'Montserrat', sans-serif; /* Títulos con personalidad */
-	font-weight: 700;
-	letter-spacing: -0.02em;
-}
+        /* Efecto Core de la fotográfia */
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00f3ff, #b829ea, #00f3ff);
+            z-index: -1;
+            filter: blur(15px);
+            animation: pulseGlow 3s infinite alternate;
+        }
+        .profile-pic {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background-color: #000;
+            filter: grayscale(20%) contrast(110%);
+        }
 
-/* HERO SECTION */
-.hero-section {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-		url('/images/fondo.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	color: white;
-	padding: 120px 0;
-	text-shadow: 0 3px 18px rgba(0, 0, 0, 0.8);
-	text-align: center;
-}
+        @keyframes pulseGlow {
+            0% { opacity: 0.6; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
 
-/* Foto perfil */
-.profile-img {
-	width: 300px;
-	height: 300px;
-	object-fit: cover;
-	border-radius: 50%;
-	border: 5px solid rgba(255, 255, 255, 0.3);
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-	transition: transform 0.3s;
-}
+        /* Badges Array estilo prompt */
+        .skill-badge {
+            background: rgba(0, 243, 255, 0.05);
+            color: #00f3ff;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin: 0.25rem;
+            transition: all 0.3s;
+        }
+        .skill-badge:hover {
+            background: rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+            transform: scale(1.05);
+        }
 
-/* Redes sociales */
-.social-btn {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	width: 55px;
-	height: 55px;
-	background: rgba(255, 255, 255, 0.1);
-	color: white;
-	border-radius: 50%;
-	margin: 0 10px;
-	text-decoration: none;
-	transition: all 0.3s ease;
-	font-size: 1.2rem;
-}
+        /* Scrollbar Minimalista Cybperbunk */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
 
-.social-btn:hover {
-	background: white;
-	color: #203a43;
-	transform: translateY(-5px);
-}
-
-/* Secciones Generales */
-.full-bg-section {
-	background-color: #0d0d0d;
-	color: white;
-	width: 100%;
-	padding: 60px 0;
-}
-
-.full-bg-section .container {
-	max-width: 1100px;
-}
-
-/* SKILL BADGES (Estilo Código) */
-.skill-badge {
-	font-family: 'JetBrains Mono', monospace; /* Fuente de código */
-	color: white;
-	padding: 5px 12px;
-	border-radius: 12px;
-	font-weight: 600;
-	margin: 3px;
-	font-size: 0.85rem;
-	display: inline-block;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	cursor: default;
-}
-
-.skill-badge:hover {
-	transform: scale(1.1);
-	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Colores de Badges (Se mantienen igual) */
-.skill-badge:nth-child(1) {
-	background-color: #1abc9c;
-}
-
-.skill-badge:nth-child(2) {
-	background-color: #3498db;
-}
-
-.skill-badge:nth-child(3) {
-	background-color: #9b59b6;
-}
-
-.skill-badge:nth-child(4) {
-	background-color: #e67e22;
-}
-
-.skill-badge:nth-child(5) {
-	background-color: #e74c3c;
-}
-
-.skill-badge:nth-child(6) {
-	background-color: #f1c40f;
-	color: #000;
-}
-
-.skill-badge:nth-child(7) {
-	background-color: #2ecc71;
-}
-
-.skill-badge:nth-child(8) {
-	background-color: #34495e;
-}
-
-.skill-badge:nth-child(9) {
-	background-color: #16a085;
-}
-
-.skill-badge:nth-child(10) {
-	background-color: #8e44ad;
-}
-
-.skill-badge:nth-child(11) {
-	background-color: #d35400;
-}
-
-.skill-badge:nth-child(12) {
-	background-color: #0058d3;
-}
-
-.skill-badge:nth-child(13) {
-	background-color: #d30074;
-}
-
-.skill-badge:nth-child(14) {
-	background-color: #d35400;
-}
-
-.skill-badge:nth-child(15) {
-	background-color: #0058d3;
-}
-
-.skill-badge:nth-child(16) {
-	background-color: #d30074;
-}
-
-/* --- TARJETAS PROYECTOS Y CERTIFICACIONES --- */
-.project-card {
-	border: none;
-	border-radius: 20px;
-	background-color: rgba(0, 0, 0, 0.6);
-	color: white;
-	overflow: hidden;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	width: 100%;
-	padding: 20px;
-	/* PROPIEDADES CRÍTICAS PARA ALINEACIÓN */
-	height: 100%; /* Ocupar todo el alto */
-	display: flex;
-	flex-direction: column; /* Columna flexible */
-}
-
-.project-card:hover {
-	transform: translateY(-10px);
-	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.project-img-container {
-	height: 220px;
-	overflow: hidden;
-}
-
-.project-card img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: transform 0.5s ease;
-}
-
-.project-card:hover img {
-	transform: scale(1.1);
-}
-
-.btn-verify {
-	background-color: transparent;
-	border: 1px solid #ffffff;
-	color: #ffffff;
-	padding: 6px 14px;
-	font-size: 0.85rem;
-	border-radius: 6px;
-	text-decoration: none;
-	transition: all 0.3s ease;
-	align-self: center; /* Centrar botón horizontalmente */
-	/* CRÍTICO: Empujar botón al fondo */
-	margin-top: auto;
-}
-
-.btn-verify:hover {
-	background-color: #ffffff;
-	color: #000000;
-}
-
-/* --- NUEVO DISEÑO EDUCACIÓN (Compacto & Alto Contraste) --- */
-.edu-card-new {
-	background-color: #1e1e1e !important; /* Gris oscuro sólido */
-	border: 1px solid #333333;
-	border-radius: 12px;
-	/* Compacto: Menos padding */
-	padding: 20px 15px;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	text-align: center;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.edu-card-new:hover {
-	transform: translateY(-5px);
-	border-color: #00d2ff;
-	box-shadow: 0 8px 20px rgba(0, 210, 255, 0.2);
-}
-
-/* Icono en círculo brillante */
-.edu-icon-circle {
-	width: 50px; /* Tamaño compacto */
-	height: 50px;
-	background: linear-gradient(135deg, #007bff, #00d2ff);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 12px;
-	box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
-}
-
-.edu-icon-circle i {
-	color: #ffffff;
-	font-size: 1.2rem;
-}
-
-/* Títulos Educación */
-.edu-title {
-	color: #ffffff;
-	font-weight: 700;
-	font-size: 0.95rem; /* Letra ajustada */
-	margin-bottom: 5px;
-	line-height: 1.3;
-}
-
-.edu-subtitle {
-	color: #b0b0b0;
-	font-size: 0.85rem;
-	margin-bottom: 12px;
-}
-
-/* Fecha Estilo Badge */
-.edu-date {
-	margin-top: auto; /* Empuja al fondo */
-	background-color: #2c2c2c;
-	color: #00d2ff;
-	padding: 3px 10px;
-	border-radius: 15px;
-	font-size: 0.75rem;
-	border: 1px solid #444;
-	font-weight: 600;
-}
-
-
-/* Estilo Glassmorphism para el botón de CV */
-.cv-glass-btn {
-    /* Fondo semitransparente oscuro (ajustado para parecerse a tus iconos) */
-    background-color: rgba(0, 0, 0, 0.4); 
-    /* Borde fino y sutil */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    /* Texto blanco */
-    color: #fff;
-    /* Redondeado completo (forma de pastilla) */
-    border-radius: 50px;
-    /* Espaciado interno */
-    padding: 10px 30px;
-    /* Fuente y tamaño */
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-decoration: none;
-    /* Transiciones suaves */
-    transition: all 0.3s ease;
-    /* Efecto de desenfoque de fondo (opcional, queda muy moderno) */
-    backdrop-filter: blur(5px);
-}
-
-/* Efecto al pasar el ratón (Hover) */
-.cv-glass-btn:hover {
-    background-color: #fff; /* Se vuelve blanco sólido */
-    color: #000; /* Texto negro */
-    transform: translateY(-3px); /* Se eleva ligeramente */
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3); /* Resplandor */
-    border-color: #fff;
-}
-
-/* Ajuste del icono dentro del botón */
-.cv-glass-btn i {
-    font-size: 1.2rem; /* Un poco más grande que el texto */
-}
-</style>
+        /* Utilidad para la opacidad inicial del GSAP */
+        .gsap-reveal { opacity: 0; transform: translateY(30px); }
+    </style>
 </head>
-<body>
+<body class="antialiased selection:bg-neon selection:text-black">
 
-	<header class="hero-section">
-		<div class="container">
-			<img src="/images/perfil.jpg" alt="Foto de perfil"
-				class="profile-img mb-4"
-				onerror="this.src='https://ui-avatars.com/api/?name=Tu+Nombre&background=random&size=200'">
-			<h1 class="fw-bold display-5" th:text="${nombre}">Tu Nombre</h1>
-			<p class="lead mb-5" style="opacity: 0.9;">  Microsoft Power Platform & Desarrollador Backend</p>
-			<div class="d-flex justify-content-center mb-4">
-				<a href="https://www.linkedin.com/in/mariolarrua1998"
-					target="_blank" class="social-btn" title="LinkedIn"><i
-					class="fab fa-linkedin-in"></i></a> <a href="https://github.com/mlv98"
-					target="_blank" class="social-btn" title="GitHub"><i
-					class="fab fa-github"></i></a> <a
-					href="https://www.youtube.com/@mariolv1998" target="_blank"
-					class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
-				<a href="mailto:mario.larruacorreo@gmail.com" class="social-btn"
-					title="Email"><i class="fas fa-envelope"></i></a>
-			</div>
-			<div class="d-flex justify-content-center mb-4">
-    <a href="/cv/CV_Mario_Larrua_Vega.pdf" 
-       class="cv-glass-btn d-inline-flex align-items-center" 
-       download="CV_Mario_Larrua_Vega.pdf">
-        <i class="fas fa-file-download me-1"></i> Descargar CV
-    </a>
-</div>
-</div>
-		</div>
-	</header>
+    <!-- Capa Root de Animación WebGL -->
+    <div id="vanta-bg"></div>
 
-	<section class="full-bg-section">
-		<div class="container text-center">
-			<h2 class="fw-bold mb-3">Sobre Mí</h2>
+    <!-- Contenedor general en z-index superior -->
+    <main class="relative z-10 container mx-auto px-4 py-20 flex flex-col items-center">
+        
+        <!-- HERO HEAD ENGINE -->
+        <header class="text-center max-w-3xl mx-auto gsap-reveal">
+            
+            <div class="profile-img-container mb-8">
+                <img src="/images/perfil.jpg" alt="Mario Larrua" class="profile-pic" onerror="this.src='https://ui-avatars.com/api/?name=Mario+Larrua&background=000&color=00f3ff&size=200'">
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight drop-shadow-[0_0_10px_rgba(0,163,255,0.8)]">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon to-purple" th:text="${nombre != null ? nombre : 'Mario Larrua Vega'}">Mario Larrua Vega</span>
+            </h1>
+            
+            <!-- Target visual para escribir la frase autocompletada estilo terminal -->
+            <p class="text-xl md:text-2xl font-mono text-gray-300 mb-6 h-8" id="typewriter"></p>
+            
+            <div class="flex justify-center gap-4 mb-8">
+                <a href="https://www.linkedin.com/in/mariolarrua1998" target="_blank" class="glass-btn w-12 h-12 flex items-center justify-center rounded-full text-xl"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/mlv98" target="_blank" class="glass-btn w-12 h-12 flex items-center justify-center rounded-full text-xl"><i class="fab fa-github"></i></a>
+                <a href="https://www.youtube.com/@mariolv1998" target="_blank" class="glass-btn w-12 h-12 flex items-center justify-center rounded-full text-xl"><i class="fab fa-youtube"></i></a>
+                <a href="mailto:mario.larruacorreo@gmail.com" class="glass-btn w-12 h-12 flex items-center justify-center rounded-full text-xl"><i class="fas fa-envelope"></i></a>
+            </div>
 
-			<p class="fs-5">Ayudo a las empresas a modernizarse transformando
-				procesos lentos y manuales en soluciones digitales ágiles con
-				Microsoft Power Platform. Cuento con certificaciones oficiales y
-				credenciales Applied Skills que validan mi capacidad técnica real.
+            <!-- Download Bin -->
+            <a href="/cv/CV_Mario_Larrua_Vega.pdf" download="CV_Mario_Larrua_Vega.pdf" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white/5 border border-neon/50 text-neon hover:bg-neon hover:text-black transition-all shadow-[0_0_15px_rgba(0,243,255,0.2)] hover:shadow-[0_0_25px_rgba(0,243,255,0.6)] font-mono font-bold uppercase text-sm tracking-wider">
+                <i class="fas fa-download"></i> Initialize_CV.exe
+            </a>
+        </header>
 
-				Mi valor diferencial es mi base técnica: gracias a mi experiencia en
-				Bases de Datos (SQL) y Sistemas, mis aplicaciones no solo son
-				visualmente funcionales, sino que son robustas, seguras y están
-				preparadas para integrarse en entornos corporativos complejos.</p>
+        <!-- SECCIÓN: ABOUT ALGORITHM -->
+        <section class="mt-32 w-full max-w-4xl mx-auto gsap-reveal">
+            <div class="glass-card p-8 md:p-10 relative overflow-hidden">
+                <!-- Luz de rebote trasera -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-neon/10 blur-[50px] rounded-full pointer-events-none"></div>
+                
+                <h2 class="text-3xl font-bold mb-6 font-mono border-b border-white/10 pb-4"><span class="text-neon">></span> sudo cat about_me.txt</h2>
+                <p class="text-gray-300 leading-relaxed text-lg mb-6">
+                    Mapeando entornos empresariales para modernizarlos. Transformo arquitecturas complejas utilizando 
+                    <strong class="text-white">Microsoft Power Platform</strong>, integraciones robustas en <strong class="text-white">Spring Boot</strong> y conectividad orientada a 
+                    <strong class="text-white">Inteligencia Artificial</strong>. Creo ecosistemas digitales autónomos de alta escalabilidad.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-badge">Power Platform Models</span>
+                    <span class="skill-badge">Dataverse API</span>
+                    <span class="skill-badge">Copilot Studio</span>
+                    <span class="skill-badge">Spring Boot Backends</span>
+                    <span class="skill-badge">Docker & Cloud</span>
+                    <span class="skill-badge">Algorithms & AI Agents</span>
+                </div>
+            </div>
+        </section>
 
-			<div class="mt-3">
-			<span
-					class="skill-badge">POWER PLATFORM</span>
-				<span class="skill-badge">Power Apps - Canvas & Model</span> 
-				<span class="skill-badge">Power Automate</span>
-				<span class="skill-badge">DATAVERSE</span> 
-				<span class="skill-badge">Copilot Studio</span> 
-					<span class="skill-badge">REST API</span>   <span
-					class="skill-badge">MOCKITO</span> <span class="skill-badge">DOCKER</span>
-				<span class="skill-badge">GIT</span> <span class="skill-badge">MySQL</span>
-				<span class="skill-badge">SQL SERVER</span>   <span class="skill-badge">JAVASCRIPT</span>
-				<span class="skill-badge">TAILWIND CSS</span>
-			</div>
-		</div>
-	</section>
+        <!-- SECCIÓN: MODEL DEPLOYMENTS (Proyectos) -->
+        <section class="mt-32 w-full max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center font-mono gsap-reveal"><span class="text-neon">~/</span> Deployments</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Loop Thymeleaf preservervado -->
+                <div class="glass-card flex flex-col h-full overflow-hidden group gsap-reveal border border-white/10 hover:border-purple/50" th:each="p : ${proyectos}">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-neon/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <img th:src="${p.imagenUrl}" alt="Proyecto" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700" onerror="this.src='/images/fondo.jpg'">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow relative z-20 bg-darkBg/50 backdrop-blur-sm">
+                        <h3 class="text-xl font-bold mb-3 text-white" th:text="${p.titulo}">TÍTULO DEL PROYECTO</h3>
+                        <p class="text-gray-400 text-sm flex-grow mb-6 leading-relaxed" th:text="${p.descripcion}">Descripción del análisis del framework...</p>
+                        
+                        <a th:href="${p.demoUrl}" target="_blank" class="w-full py-2 rounded bg-white/5 border border-white/20 text-center hover:bg-neon hover:text-black hover:border-neon transition-all font-mono text-sm uppercase flex justify-center items-center gap-2">
+                            <i class="fas fa-terminal"></i> Execute Process
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-	<section class="full-bg-section">
-		<div class="container text-center">
-			<h2 class="fw-bold mb-4">Proyectos</h2>
-			<div class="row g-5">
-				<div class="col-md-4 col-sm-6" th:each="p : ${proyectos}">
-					<div class="project-card h-100 shadow-sm d-flex flex-column">
-						<div class="project-img-container">
-							<img th:src="${p.imagenUrl}" alt="Imagen del proyecto"
-								onerror="this.src='https://via.placeholder.com/400x300?text=Proyecto'">
-						</div>
-						<div class="card-body d-flex flex-column flex-grow-1 p-0 mt-3">
-							<h5 class="card-title fw-bold" th:text="${p.titulo}">Título</h5>
-							<p class="card-text flex-grow-1" th:text="${p.descripcion}">Descripción...</p>
-							<div class="mt-3 mt-auto">
-								<a th:href="${p.demoUrl}"
-									class="btn btn-outline-dark w-100 rounded-pill" target="_blank"
-									style="color: white; border-color: white;"> <i
-									class="fas fa-play-circle me-2"></i>Ver Demo
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+        <!-- SECCIÓN: TRAINING & NEURAL DATA (Formación y Docs) -->
+        <section class="mt-32 w-full max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Training -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 font-mono gsap-reveal border-b border-white/10 pb-2"><i class="fas fa-microchip text-purple mr-2"></i> Training_Data</h2>
+                    <div class="space-y-4">
+                        <div class="glass-card p-5 flex items-center gap-4 gsap-reveal hover:-translate-x-1 transition-transform">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon to-purple flex items-center justify-center text-white shrink-0 shadow-[0_0_15px_rgba(184,41,234,0.4)]">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-md">Consultor Power Platform</h4>
+                                <p class="text-gray-400 text-sm font-mono">Tajamar | Oct 2025 - Marz 2026</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-5 flex items-center gap-4 gsap-reveal hover:-translate-x-1 transition-transform">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-neon flex items-center justify-center text-white shrink-0">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-md">Desarrollo Aplicaciones Web</h4>
+                                <p class="text-gray-400 text-sm font-mono">EEP iGroup | 2023 - 2025</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-5 flex items-center gap-4 gsap-reveal hover:-translate-x-1 transition-transform">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-teal-400 flex items-center justify-center text-white shrink-0">
+                                <i class="fab fa-java"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-md">Desarrollo Java Spring</h4>
+                                <p class="text-gray-400 text-sm font-mono">Grupo Aspasia | 2025 (350h)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-	<section class="full-bg-section">
-		<div class="container">
-			<h2 class="fw-bold mb-5 text-center">Formación Académica</h2>
-			<div class="row g-3 justify-content-center">
+                <!-- Certifications -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-8 font-mono gsap-reveal border-b border-white/10 pb-2"><i class="fas fa-fingerprint text-neon mr-2"></i> Verified_Nodes</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+                        <a href="https://learn.microsoft.com/api/credentials/share/" target="_blank" class="glass-card p-4 gsap-reveal flex flex-col hover:bg-neon/5 cursor-pointer no-underline">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="fab fa-microsoft text-2xl text-blue-400"></i>
+                                <h5 class="text-sm font-bold text-white leading-tight">Applied Skills: M365 Copilot & IA</h5>
+                            </div>
+                            <span class="text-xs text-neon font-mono mt-auto">Nov 2025</span>
+                        </a>
 
+                        <a href="https://learn.microsoft.com/api/credentials/share/" target="_blank" class="glass-card p-4 gsap-reveal flex flex-col hover:bg-neon/5 cursor-pointer no-underline">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="fab fa-microsoft text-2xl text-blue-400"></i>
+                                <h5 class="text-sm font-bold text-white leading-tight">Power Platform Fundamentals</h5>
+                            </div>
+                            <span class="text-xs text-neon font-mono mt-auto">Dic 2025</span>
+                        </a>
+                        
+                        <a href="https://learn.microsoft.com/api/credentials/share/" target="_blank" class="glass-card p-4 gsap-reveal flex flex-col hover:bg-neon/5 cursor-pointer no-underline">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="fab fa-microsoft text-2xl text-blue-400"></i>
+                                <h5 class="text-sm font-bold text-white leading-tight">Applied Skills: Dataverse & Model-Driven</h5>
+                            </div>
+                            <span class="text-xs text-neon font-mono mt-auto">Nov 2025</span>
+                        </a>
 
-				<div class="col-md-6 col-lg-3">
-					<div class="edu-card-new">
-						<div class="edu-icon-circle">
-							<i class="fas fa-chalkboard-teacher"></i>
-						</div>
-						<h5 class="edu-title">Consultor Power Platform</h5>
-						<p class="edu-subtitle">Tajamar (Madrid)</p>
-						<span class="edu-date">Oct 2025 – Marz 2026 (500h)</span>
-					</div>
-				</div>
+                        <a href="#" class="glass-card p-4 gsap-reveal flex flex-col hover:bg-purple/5 border-purple/20 cursor-pointer no-underline">
+                            <div class="flex items-center gap-3 mb-2">
+                                <i class="fas fa-project-diagram text-2xl text-purple"></i>
+                                <h5 class="text-sm font-bold text-white leading-tight">Gestión Ágil de Proyectos PMI</h5>
+                            </div>
+                            <span class="text-xs text-purple font-mono mt-auto">Dic 2025</span>
+                        </a>
+                        
+                    </div>
+                </div>
 
+            </div>
+        </section>
+    </main>
 
-				<div class="col-md-6 col-lg-3">
-					<div class="edu-card-new">
-						<div class="edu-icon-circle">
-							<i class="fas fa-code"></i>
-						</div>
-						<h5 class="edu-title">Desarrollo Appilcaciones Web</h5>
-						<p class="edu-subtitle">EEP iGroup</p>
-						<span class="edu-date">2023 – 2025</span>
-					</div>
-				</div>
+    <footer class="relative z-10 w-full py-8 border-t border-white/10 mt-20 text-center text-gray-500 font-mono text-sm bg-black/60 backdrop-blur-md">
+        <p><span class="text-purple">System</span>.<span class="text-blue-400">out</span>.println("<span class="text-green-400">© 2026 Mario Larrua Vega - Neural Code Active</span>");</p>
+    </footer>
 
-				<div class="col-md-6 col-lg-3">
-					<div class="edu-card-new">
-						<div class="edu-icon-circle">
-							<i class="fab fa-java"></i>
-						</div>
-						<h5 class="edu-title">Desarrollo Java Spring</h5>
-						<p class="edu-subtitle">Grupo Aspasia</p>
-						<span class="edu-date">2025 (350h)</span>
-					</div>
-				</div>
+    <!-- LIBRERIAS PARA ANIMACIONES (CDN) -->
+    <!-- WebGL Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    
+    <!-- GSAP (Core Engine de transiciones) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-				
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. INICIALIZAR RED 3D BACKGROUND (Vanta Net)
+            VANTA.NET({
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x00f3ff,       // Nodos interactivos en Cyan Neón
+                backgroundColor: 0x050505, // Fondo completamente negro/profundo
+                points: 15.00,
+                maxDistance: 22.00,
+                spacing: 16.00,
+                showDots: true
+            });
 
+            // 2. EFECTO TYPEWRITER (Escribiendo Script...)
+            const text = "System Arch | AI Implementation | Power Platform";
+            const target = document.getElementById("typewriter");
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    target.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, Math.random() * 50 + 50); // Velocidad variable robótica
+                } else {
+                    target.innerHTML += '<span class="animate-pulse text-neon ml-1">█</span>';
+                }
+            }
+            setTimeout(typeWriter, 1200); 
 
-			</div>
-		</div>
-	</section>
+            // 3. REGISTRAR GSAP ANIMATIONS SCROLLTRIGGER
+            gsap.registerPlugin(ScrollTrigger);
 
-	<section class="full-bg-section">
-		<div class="container text-center">
-			<h2 class="fw-bold mb-5">Licencias y Certificaciones</h2>
-			<div class="row g-4">
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/fundamentals.jpg" alt="Microsoft"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Microsoft Certified: Power
-								Platform Fundamentals</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Dic 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> Power Apps, Automate, BI, Copilot
-						</p>
-
-						<a
-							href="https://www.credly.com/badges/e9d77c78-9673-4226-9fa9-4736afbe6a8a/linked_in_profile"
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/pmi-logo.png" alt="PMI"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Gestión de Proyectos Ágiles</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Dic 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> Gestión ágil de proyectos
-						</p>
-						<a href="https://www.linkedin.com/learning/certificates/..."
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/microsoft-logo.png" alt="Microsoft"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Microsoft Applied Skills: Power
-								Apps Canvas</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Nov 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> Aplicaciones de lienzo
-						</p>
-						<a href="https://learn.microsoft.com/api/credentials/share/..."
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/microsoft-logo.png" alt="Microsoft"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Microsoft Applied Skills:
-								Model-Driven Apps</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Nov 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> Apps basadas en modelo, Dataverse
-						</p>
-						<a href="https://learn.microsoft.com/api/credentials/share/..."
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/microsoft-logo.png" alt="Microsoft"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Microsoft Applied Skills: Power
-								Automate</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Nov 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> Automatización de procesos
-						</p>
-						<a href="https://learn.microsoft.com/api/credentials/share/..."
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/microsoft-logo.png" alt="Microsoft"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Microsoft Applied Skills: M365
-								Copilot</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Nov 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> Seguridad, Cumplimiento, Copilot
-						</p>
-						<a href="https://learn.microsoft.com/api/credentials/share/..."
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/microsoft-logo.png" alt="Microsoft"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Microsoft Applied Skills:
-								Agentes IA</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Nov 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> Informes con agentes de IA
-						</p>
-						<a href="https://learn.microsoft.com/api/credentials/share/..."
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/linkedin-logo.png" alt="LinkedIn"
-								style="width: 40px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Análisis financiero con
-								PowerApps</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Nov 2025
-						</p>
-						<p class="small text-start">
-							<strong>Aptitudes:</strong> PowerApps, Finanzas
-						</p>
-						<a href="https://www.linkedin.com/learning/certificates/..."
-							target="_blank" rel="noopener noreferrer"
-							class="btn btn-verify mt-auto"> Ver credencial </a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="project-card h-100 d-flex flex-column">
-						<div class="d-flex align-items-center mb-3">
-							<img src="/images/google-logo.png" alt="Google"
-								style="width: 50px; margin-right: 10px;">
-							<h5 class="mb-0 text-start">Google Analytics Certification</h5>
-						</div>
-						<p class="small mb-1 text-start">
-							<strong>Expedición:</strong> Oct 2025
-						</p>
-						<p class="small text-start">
-							<strong>Vencimiento:</strong> Nov 2026
-						</p>
-						<a href="https://skillshop.credential.net/..." target="_blank"
-							rel="noopener noreferrer" class="btn btn-verify mt-auto"> Ver
-							credencial </a>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
-	<footer class="text-center py-4 bg-black" style="color: white;">
-		<small>&copy; 2025 Desarrollado por Mario Larrúa Vega</small>
-	</footer>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            const revealElements = document.querySelectorAll(".gsap-reveal");
+            revealElements.forEach((el, index) => {
+                gsap.to(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%", // Animar cuando asoman un 90%
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    delay: el.classList.contains('glass-card') ? (index % 4) * 0.15 : 0 
+                });
+            });
+        });
+    </script>
 </body>
 </html>
