@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mario Larrua - AI & Backend Engineer</title>
+    <title>Mario Larrúa Vega - Microsoft AI Analyst & Fusion Dev</title>
+    
+    <!-- Open Graph / SEO Meta Tags -->
+    <meta name="description" content="Microsoft AI Analyst & Fusion Dev. Transformo arquitecturas complejas utilizando Microsoft Power Platform, Spring Boot e Inteligencia Artificial." />
+    <!-- LinkedIn / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mariolarrua.dev" />
+    <meta property="og:title" content="Mario Larrúa Vega - Microsoft AI Analyst & Fusion Dev" />
+    <meta property="og:description" content="Transformo arquitecturas complejas utilizando Microsoft Power Platform, Spring Boot e Inteligencia Artificial." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/mlv98/Portafolio/main/src/main/resources/static/images/perfil.jpg" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://mariolarrua.dev" />
+    <meta property="twitter:title" content="Mario Larrúa Vega - Microsoft AI Analyst & Fusion Dev" />
+    <meta property="twitter:description" content="Transformo arquitecturas complejas utilizando Microsoft Power Platform, Spring Boot e Inteligencia Artificial." />
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/mlv98/Portafolio/main/src/main/resources/static/images/perfil.jpg" />
     
     <!-- Fuentes: JetBrains Mono para código/AI feel, Inter para lectura -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -31,6 +46,59 @@
 
     <!-- UI/UX de Experto en IA - Estilos Base -->
     <style>
+        /* Cursor Oculto Nativamente para reemplazo visual Magnético */
+        @media (pointer: fine) {
+            body, a, button, input { cursor: none !important; }
+        }
+
+        /* Custom Cursor Neón */
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 10px; height: 10px;
+            background-color: #00f3ff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+        .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 2px solid rgba(0, 243, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+        /* Hover Effect para Custom Cursor */
+        .cursor-hover .cursor-dot {
+            width: 0; height: 0; opacity: 0;
+        }
+        .cursor-hover .cursor-outline {
+            width: 60px; height: 60px;
+            background-color: rgba(0, 243, 255, 0.1);
+            border-color: #00f3ff;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Cortina Transición entre páginas */
+        .page-transition-curtain {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: #050505;
+            z-index: 100000;
+            transform: translateY(100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         body { margin: 0; background-color: #050505; color: #fff; overflow-x: hidden; }
         
         /* Contenedor del render 3D Background */
@@ -132,6 +200,13 @@
     </style>
 </head>
 <body class="antialiased selection:bg-neon selection:text-black">
+
+    <!-- Efectos Gráficos Avanzados: Cursor Neón y Curtain de Carga -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="page-transition-curtain" id="page-curtain">
+        <h2 class="text-4xl text-neon font-mono drop-shadow-[0_0_15px_rgba(0,243,255,0.8)]"><i class="fas fa-satellite-dish animate-spin mr-3"></i> Estableciendo Conexión...</h2>
+    </div>
 
     <!-- Capa Root de Animación WebGL -->
     <div id="vanta-bg"></div>
@@ -300,6 +375,28 @@
         <p><span class="text-purple">System</span>.<span class="text-blue-400">out</span>.println("<span class="text-green-400">© 2026 Mario Larrua Vega - Neural Code Active</span>");</p>
     </footer>
 
+    <!-- INTERFAZ ASISTENTE DE IA (Terminal AI) -->
+    <div id="ai-assistant-btn" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-black/80 border border-neon/50 rounded-full flex items-center justify-center cursor-pointer shadow-[0_0_15px_rgba(0,243,255,0.4)] hover:shadow-[0_0_25px_rgba(0,243,255,0.8)] backdrop-blur-md hover:scale-110 transition-all duration-300">
+        <i class="fas fa-robot text-neon text-2xl"></i>
+    </div>
+    
+    <div id="ai-assistant-panel" class="fixed bottom-24 right-6 w-[350px] h-[500px] max-h-[70vh] z-50 glass-card flex flex-col pointer-events-none opacity-0 transform translate-y-4 transition-all duration-500">
+        <div class="h-12 border-b border-white/10 flex items-center justify-between px-4 bg-neon/5 backdrop-blur-md rounded-t-2xl shrink-0">
+            <span class="font-mono text-sm text-neon font-bold"><i class="fas fa-terminal mr-2"></i> Copilot Mario.exe</span>
+            <i class="fas fa-times cursor-pointer text-gray-400 hover:text-white" id="close-ai-btn"></i>
+        </div>
+        <div class="flex-1 p-4 overflow-y-auto space-y-4 font-mono text-xs flex flex-col" id="ai-chat-history">
+            <div class="bg-white/5 border border-white/10 p-3 flex flex-col rounded-tr-lg rounded-bl-lg rounded-br-lg max-w-[85%] self-start">
+                <span class="text-gray-300">Iniciando conexión con Neural API...</span>
+                <span class="text-neon mt-1 block">Hola. Soy el agente digital de Mario. Conozco todo sobre él. ¿Qué te gustaría saber?</span>
+            </div>
+        </div>
+        <div class="p-3 border-t border-white/10 bg-black/40 backdrop-blur-md rounded-b-2xl flex gap-2 shrink-0">
+            <input type="text" id="ai-chat-input" placeholder="Pregúntame algo..." class="flex-1 bg-transparent border border-white/20 rounded-md px-3 py-2 text-xs text-white outline-none focus:border-neon transition-colors font-mono">
+            <button id="ai-chat-submit" class="bg-neon/10 border border-neon/40 text-neon px-3 rounded-md hover:bg-neon/20 transition-all"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
     <!-- LIBRERIAS PARA ANIMACIONES (CDN) -->
     <!-- WebGL Rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -408,6 +505,109 @@
                     scrub: true
                 }
             });
+
+            // 5. Módulo AI Assistant & Custom Cursor Magnético
+            const isTouch = window.matchMedia("(pointer: coarse)").matches;
+            
+            if (!isTouch) {
+                const cursorDot = document.querySelector('.cursor-dot');
+                const cursorOutline = document.querySelector('.cursor-outline');
+                
+                document.addEventListener('mousemove', (e) => {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+                    
+                    cursorOutline.animate({
+                        left: `${posX}px`,
+                        top: `${posY}px`
+                    }, { duration: 500, fill: "forwards" });
+                });
+
+                document.querySelectorAll('a, button, input, .glass-card, #ai-assistant-btn').forEach(el => {
+                    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+                });
+            } else {
+                document.querySelector('.cursor-dot').style.display = 'none';
+                document.querySelector('.cursor-outline').style.display = 'none';
+            }
+
+            // AI Panel Toggle
+            const aiBtn = document.getElementById('ai-assistant-btn');
+            const aiPanel = document.getElementById('ai-assistant-panel');
+            const closeAiBtn = document.getElementById('close-ai-btn');
+
+            const togglePanel = () => {
+                const isActive = aiPanel.style.opacity === "1";
+                if (isActive) {
+                    aiPanel.style.opacity = "0";
+                    aiPanel.style.pointerEvents = "none";
+                    aiPanel.style.transform = "translateY(16px)";
+                } else {
+                    aiPanel.style.opacity = "1";
+                    aiPanel.style.pointerEvents = "auto";
+                    aiPanel.style.transform = "translateY(0)";
+                }
+            };
+            aiBtn.addEventListener('click', togglePanel);
+            closeAiBtn.addEventListener('click', togglePanel);
+
+            // Simulación Chat IA simple
+            const createBubble = (text, isUser = false) => {
+                const div = document.createElement("div");
+                div.className = isUser 
+                    ? "bg-neon/10 border border-neon/40 p-3 rounded-tl-lg rounded-bl-lg rounded-br-lg max-w-[85%] self-end ml-auto text-white shadow-[0_0_10px_rgba(0,163,255,0.2)]" 
+                    : "bg-white/5 border border-white/10 p-3 rounded-tr-lg rounded-bl-lg rounded-br-lg max-w-[85%] text-neon";
+                div.textContent = text;
+                return div;
+            }
+            const chatHistory = document.getElementById('ai-chat-history');
+            const chatInput = document.getElementById('ai-chat-input');
+            const chatSubmit = document.getElementById('ai-chat-submit');
+            
+            const handleMessage = () => {
+                const msg = chatInput.value.trim();
+                if (!msg) return;
+                
+                chatHistory.appendChild(createBubble(msg, true));
+                chatInput.value = '';
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+
+                setTimeout(() => {
+                    const aiDiv = createBubble("System Override: Actualmente soy un prototipo de interfaz. ¡Pronto me conectaré al cerebro algorítmico de Mario mediante Microsoft Copilot Studio! Contacta con él para ver mi código fuente.", false);
+                    chatHistory.appendChild(aiDiv);
+                    chatHistory.scrollTop = chatHistory.scrollHeight;
+                }, 800);
+            }
+            chatSubmit.addEventListener('click', handleMessage);
+            chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') handleMessage() });
+
+            // 6. Transición de Páginas (Cortina de Carga)
+            const curtain = document.getElementById('page-curtain');
+            
+            // Animación de entrada de la página inicial
+            gsap.to(curtain, { y: "-100%", duration: 1.2, ease: "power4.inOut" });
+
+            document.querySelectorAll('a[href^="/"]').forEach(link => {
+                if(link.target !== "_blank") {
+                    link.addEventListener('click', function(e) {
+                        const destination = this.href;
+                        if(destination === window.location.href) return;
+                        e.preventDefault();
+                        
+                        gsap.to(curtain, { 
+                            y: "0%", 
+                            duration: 0.8, 
+                            ease: "power4.inOut",
+                            onComplete: () => { window.location.href = destination; }
+                        });
+                    });
+                }
+            });
+            
         });
     </script>
 </body>
