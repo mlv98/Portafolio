@@ -1,138 +1,87 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
-	rel="stylesheet">
-
-<style>
-body {
-	font-family: 'Poppins', sans-serif;
-	background-color: #0d0d0d;
-	color: white;
-}
-
-.project-header {
-	text-align: center;
-	padding: 60px 20px 40px 20px;
-}
-
-.project-header h1 {
-	font-size: 2.5rem;
-	margin-bottom: 15px;
-}
-
-.project-header p {
-	font-size: 1.1rem;
-	color: #ccc;
-}
-
-/* Botón GitHub */
-.btn-github {
-	display: inline-flex;
-	align-items: center;
-	gap: 10px;
-	color: white;
-	border: 2px solid white;
-	padding: 10px 22px;
-	border-radius: 10px;
-	font-weight: 500;
-	transition: 0.3s ease;
-	text-decoration: none;
-}
-
-.btn-github:hover {
-	background-color: white;
-	color: #0d0d0d;
-}
-
-/* Icono GitHub blanco */
-.btn-github img {
-	width: 22px;
-	height: 22px;
-	filter: invert(1); /* convierte el SVG en blanco */
-	transition: 0.3s ease;
-}
-
-.btn-github:hover img {
-	filter: invert(0); /* se vuelve negro si el fondo es blanco */
-}
-
-/* Carrusel */
-.carousel-item img, .carousel-item video {
-	width: 100%;
-	max-height: 750px;
-	object-fit: cover;
-	border-radius: 15px;
-}
-
-.project-description {
-	padding: 40px 20px;
-	background-color: rgba(255, 255, 255, 0.05);
-	border-radius: 15px;
-	margin-top: 30px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Nóminas - Detail Node</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'], },
+                    colors: { neon: '#00f3ff', purple: '#b829ea', darkBg: '#050505' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { margin: 0; background-color: #050505; color: #fff; overflow-x: hidden; }
+        #vanta-bg { position: fixed; z-index: -1; top: 0; left: 0; width: 100vw; height: 100vh; }
+        .glass-card { background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 1rem; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); transition: all 0.4s ease; }
+        .vid-container { border: 1px solid rgba(0, 243, 255, 0.2); box-shadow: 0 0 30px rgba(0, 243, 255, 0.1); }
+        .skill-badge { background: rgba(0, 243, 255, 0.05); color: #00f3ff; border: 1px solid rgba(0, 243, 255, 0.2); padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; display: inline-block; margin: 0.25rem; transition: all 0.3s; }
+        .skill-badge:hover { background: rgba(0, 243, 255, 0.2); box-shadow: 0 0 10px rgba(0, 243, 255, 0.5); transform: scale(1.05); }
+        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #050505; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; } ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+        .gsap-reveal { opacity: 0; transform: translateY(30px); }
+    </style>
 </head>
-
-<body>
-
-	<!-- CABECERA DEL PROYECTO -->
-	<div class="container project-header">
-    <h1>Gestor de Nóminas</h1>
-    <p>Es una solución inteligente para la administración de pagos que automatiza la creación, 
-    consulta y generación de recibos PDF. A través de una interfaz ágil, el sistema centraliza 
-    la información salarial, procesa los cálculos y almacena automáticamente los comprobantes 
-    en la nube para su distribución segura.</p>
-
-
-		<!-- Botón GitHub (icono blanco real) -->
-		<a href="https://github.com/mlv98/Asistente-ti-copilot" target="_blank"
-			class="btn-github mt-3"> <img
-			src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/github.svg"
-			alt="GitHub"> Ver en GitHub
-		</a>
-	</div>
-
-	<!-- GALERÍA / CAROUSEL -->
-	<div id="projectCarousel" class="carousel slide container" data-bs-ride="false">
-    <div class="carousel-inner">
-
-        <div class="carousel-item active">
-            <video class="d-block w-100" controls>
-                <source src="/videos/nominas.mp4" type="video/mp4">
-                Tu navegador no soporta videos.
-            </video>
+<body class="antialiased selection:bg-neon selection:text-black">
+    <div id="vanta-bg"></div>
+    <main class="relative z-10 container mx-auto px-4 py-16 flex flex-col items-center max-w-5xl">
+        <div class="w-full mb-10 flex justify-between items-center gsap-reveal">
+            <a href="/" class="text-gray-400 hover:text-neon transition-colors font-mono text-sm flex items-center gap-2">
+                <i class="fas fa-chevron-left"></i> cd .. Return to Base
+            </a>
+            <span class="text-white/20 font-mono text-xs">Node: Nominas.exe</span>
         </div>
-
-        </div>
-
-    </div>
-
-		<!-- DESCRIPCIÓN -->
-		<div class="container project-description">
-			<h3>Descripción del Proyecto</h3>
-			<p>Este sistema de gestión de nóminas es una solución enfocada en la digitalización y automatización del ciclo de vida de los pagos corporativos. El proyecto resuelve la ineficiencia de los registros manuales mediante una arquitectura integrada que permite crear nuevas nóminas, consultar el histórico de pagos y automatizar la generación de documentos legales. La solución centraliza la información para eliminar errores de cálculo y asegurar que cada registro sea auditable y accesible en tiempo real.</p>
-
-<p>La interfaz del usuario ha sido desarrollada como una <strong>Power App (Canvas)</strong>, proporcionando una experiencia intuitiva para el administrador. La persistencia de los datos se gestiona en <strong>Microsoft Dataverse</strong>, aprovechando su estructura de tablas relacionales para garantizar la integridad de la información sensible. Una vez generada la nómina, el sistema utiliza <strong>Power Automate</strong> para orquestar la lógica de negocio: el flujo extrae los datos, genera un archivo dinámico y lo convierte en un recibo PDF profesional. Finalmente, estos documentos se almacenan y organizan automáticamente en <strong>OneDrive for Business</strong>, facilitando su consulta posterior y permitiendo compartirlos de forma segura con los empleados.</p>
-
-			<h5>Tecnologías usadas:</h5>
-		<ul> <li>Microsoft Power Apps (Canvas): Diseño de la interfaz de usuario personalizada para la captura de datos y visualización de registros.</li> <li>Microsoft Dataverse: Infraestructura de base de datos relacional para el almacenamiento seguro y escalable de la información de nóminas.</li> <li>Microsoft Power Automate: Automatización del flujo de trabajo, procesamiento de datos y orquestación entre servicios.</li> <li>OneDrive for Business: Gestión de almacenamiento en la nube para el resguardo y organización de los archivos PDF generados.</li> </ul>
-
-			<!-- Botón volver -->
-			<a href="/" class="btn btn-outline-light mt-4"> ← Volver al
-				Portafolio </a>
-
-		</div>
-
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <header class="text-center w-full mb-12 gsap-reveal">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 font-mono tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-neon to-purple">> Gestor de Nóminas</h1>
+            <p class="text-xl text-gray-300 font-mono mb-8 opacity-80">// Solución inteligente para administración de pagos y creación automática de PDF.</p>
+            <a href="https://github.com/mlv98/Asistente-ti-copilot" target="_blank" class="inline-flex items-center gap-3 px-6 py-2 rounded-full glass-card hover:border-purple/50 hover:bg-purple/10 transition-all font-mono text-sm text-white">
+                <i class="fab fa-github text-xl"></i> View Source Code
+            </a>
+        </header>
+        <section class="w-full mb-16 gsap-reveal">
+            <div class="vid-container rounded-2xl overflow-hidden bg-black/80 relative group">
+                <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-neon opacity-50 z-20"></div>
+                <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-neon opacity-50 z-20"></div>
+                <video class="w-full h-auto max-h-[600px] object-contain relative z-10" controls>
+                    <source src="/videos/nominas.mp4" type="video/mp4">
+                    Tu navegador no soporta el tag de video.
+                </video>
+            </div>
+        </section>
+        <section class="w-full grid grid-cols-1 md:grid-cols-3 gap-8 gsap-reveal">
+            <div class="md:col-span-2 glass-card p-8">
+                <h3 class="text-2xl font-bold mb-4 font-mono border-b border-white/10 pb-2"><i class="fas fa-terminal text-neon mr-2"></i> System.Description</h3>
+                <p class="text-gray-300 leading-relaxed">
+                    Este sistema enfocado en la digitalización automatiza el ciclo de vida de los pagos corporativos. Resuelve la ineficiencia de los registros manuales permitiendo crear, consultar métricas y generar documentos legales de forma ágil, auditable y accesible en tiempo real.
+                    <br><br>
+                    La interfaz ha sido desarrollada como una <strong>Power App (Canvas)</strong>, persistiendo datos relacionales en <strong>Microsoft Dataverse</strong>. Con <strong>Power Automate</strong>, el backend del flujo extrae datos, los incrusta dinámicamente y genera un recibo en PDF profesional distribuyéndolo organizadamente en <strong>OneDrive for Business</strong>.
+                </p>
+            </div>
+            <div class="glass-card p-8">
+                <h3 class="text-xl font-bold mb-4 font-mono border-b border-white/10 pb-2"><i class="fas fa-microchip text-purple mr-2"></i> Tech_Stack</h3>
+                <div class="flex flex-col gap-3">
+                    <span class="skill-badge block text-center">Power Apps (Canvas)</span>
+                    <span class="skill-badge block text-center">Microsoft Dataverse</span>
+                    <span class="skill-badge block text-center">Power Automate</span>
+                    <span class="skill-badge block text-center">OneDrive for Business</span>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            VANTA.NET({ el: "#vanta-bg", mouseControls: true, touchControls: true, minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00, color: 0x00f3ff, backgroundColor: 0x050505, points: 12.00, maxDistance: 20.00, spacing: 18.00, showDots: true });
+            gsap.to(document.querySelectorAll(".gsap-reveal"), { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out" });
+        });
+    </script>
 </body>
 </html>
