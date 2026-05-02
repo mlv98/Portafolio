@@ -680,11 +680,40 @@
                 chatInput.value = '';
                 chatHistory.scrollTop = chatHistory.scrollHeight;
 
+                // Lógica de respuesta robusta basada en el contenido del portafolio del usuario
+                const userMsg = msg.toLowerCase();
+                let aiResponse = "";
+                
+                if (userMsg.includes("hola") || userMsg.includes("quien") || userMsg.includes("saludo")) {
+                    aiResponse = "¡Hola! Soy el Agente de IA integrado en el portafolio de Mario. Puedo resumirte su experiencia, stack tecnológico, estudios o sus 16 certificaciones. ¿Qué te gustaría explorar?";
+                } else if (userMsg.includes("experiencia") || userMsg.includes("trabajo") || userMsg.includes("laboral") || userMsg.includes("empresa") || userMsg.includes("aspasia")) {
+                    aiResponse = "Mario tiene experiencia reciente en Grupo Aspasia (2025) como desarrollador (350h). Su enfoque principal es diseñar soluciones de alta escalabilidad e ecosistemas autónomos.";
+                } else if (userMsg.includes("estudios") || userMsg.includes("titulacion") || userMsg.includes("universidad") || userMsg.includes("formacion") || userMsg.includes("carrera")) {
+                    aiResponse = "Estudió la carrera de Ingeniería Informática en la Universidad Rey Juan Carlos, y cuenta también con formación avanzada técnica (Grado Superior DAW y Grado Medio SMR) del IES Luis Vives.";
+                } else if (userMsg.includes("certificado") || userMsg.includes("cursos") || userMsg.includes("credenciales") || userMsg.includes("microsoft") || userMsg.includes("reconocimiento")) {
+                    aiResponse = "Mario ha validado 16 credenciales destacadas. Sobresalen las de IA (Agentic & Azure AI Essentials), Copilot Studio (Pro Code) y múltiples ramas de Power Platform (Dataverse, Model-Driven, Canvas y Power Automate).";
+                } else if (userMsg.includes("tecnologia") || userMsg.includes("stack") || userMsg.includes("herramientas") || userMsg.includes("habilidades") || userMsg.includes("power platform") || userMsg.includes("java")) {
+                    aiResponse = "Su stack se compone de Inteligencia Artificial (Copilot Studio, Modelos Generativos/Autónomos, Azure AI) y Backend sólido (Java, Spring Boot, Docker). Es experto orquestando arquitecturas Pro-Code sobre Power Platform.";
+                } else if (userMsg.includes("proyecto") || userMsg.includes("portfolio") || userMsg.includes("desarrollo") || userMsg.includes("aplicacion") || userMsg.includes("github")) {
+                    aiResponse = "En la sección de Model Deployments puedes ver arquitecturas complejas como 'Gym Mario', 'Gestión de Nóminas' o 'Rampage Store'. Utiliza Java, Spring Boot y diseños fron-end altamente pulidos con Tailwind y webGL.";
+                } else if (userMsg.includes("contacto") || userMsg.includes("hablar") || userMsg.includes("email") || userMsg.includes("linkedin") || userMsg.includes("contratar")) {
+                    aiResponse = "Puedes conectar con Mario a través de su LinkedIn o GitHub, los cuales están disponibles en las tarjetas interactivas de la cabecera superior y en la base de datos de credenciales.";
+                } else {
+                    aiResponse = "Recapitulando tu solicitud... Como Agente AI analizando la matriz de datos de Mario: Él es un Ingeniero en IA y Soluciones de Vanguardia. Puedes preguntarme términos específicos como 'experiencia', 'proyectos', 'stack', 'certificaciones' o 'estudios' para extraer la información detallada.";
+                }
+
+                // Generar respuestas con scroll automático
+                const typingBubble = createBubble(". . .", false);
+                typingBubble.classList.add("animate-pulse", "font-mono");
+                chatHistory.appendChild(typingBubble);
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+
                 setTimeout(() => {
-                    const aiDiv = createBubble("System Override: Actualmente soy un prototipo de interfaz. ¡Pronto me conectaré al cerebro algorítmico de Mario mediante Microsoft Copilot Studio! Contacta con él para ver mi código fuente.", false);
+                    chatHistory.removeChild(typingBubble);
+                    const aiDiv = createBubble(aiResponse, false);
                     chatHistory.appendChild(aiDiv);
                     chatHistory.scrollTop = chatHistory.scrollHeight;
-                }, 800);
+                }, 700 + Math.random() * 600);
             }
             chatSubmit.addEventListener('click', handleMessage);
             chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') handleMessage() });
