@@ -191,9 +191,15 @@
 
         /* Scrollbar Minimalista Cybperbunk */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 243, 255, 0.3); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+
+        /* Para el contenedor de certificados */
+        .overflow-y-auto {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 243, 255, 0.3) transparent;
+        }
 
         /* Utilidad para la opacidad inicial del GSAP */
         .gsap-reveal { opacity: 0; transform: translateY(30px); }
@@ -333,7 +339,7 @@
                         <span><i class="fas fa-fingerprint text-neon mr-2"></i> Verified_Nodes</span>
                         <span class="text-[0.65rem] text-neon border border-neon/50 px-2 py-1 rounded-full bg-neon/10">16 ITEMS</span>
                     </h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[350px] overflow-y-auto pr-2 pb-4" data-lenis-prevent style="scrollbar-width: thin; scrollbar-color: #00f3ff #050505;">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[350px] overflow-y-auto pr-2 pb-4 pointer-events-auto" data-lenis-prevent>
                         
                         <a href="https://linkedin.com/in/mariolarrua1998" target="_blank" title="Pro Code with Copilot Studio - Proficient" class="glass-card p-4 gsap-reveal flex flex-col hover:bg-neon/5 cursor-pointer no-underline border-white/10 hover:border-blue-400/50">
                             <div class="flex items-center gap-3 mb-2">
